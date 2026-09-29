@@ -6,7 +6,6 @@ public class estudiante {
     private String correo;
 
     public estudiante(){
-
     }
 
     public estudiante(int id, String nombre, String correo) {
@@ -28,8 +27,10 @@ public class estudiante {
     }
 
     public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }
