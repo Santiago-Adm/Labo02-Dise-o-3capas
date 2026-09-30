@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.presentacion.estudianteUI;
+import org.example.presentacion.cursoUI;
 
 import java.util.Scanner;
 
@@ -26,7 +27,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Ha elegido Gestionar Cursos.");
-                    //cursoUI.mostrarMenu(sc);
+                    cursoUI.mostrarMenu(sc);
                     break;
                 case 0:
                     System.out.println("Sistema finalizado.");
