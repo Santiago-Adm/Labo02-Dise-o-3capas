@@ -1,0 +1,85 @@
+package org.example.presentation;
+import org.example.domain.model.estudiante;
+import org.example.application.estudianteService;
+import java.util.Scanner;
+
+public class estudianteUI {
+    private final estudianteService service;
+    public estudianteUI(estudianteService service){
+        this.service = service;
+    }
+
+    public void mostrarMenu(Scanner sc){
+        int opcion;
+        do{
+            System.out.println("\n=== GESTION ESTUDIANTE ===");
+            System.out.println("1. Registrar");
+            System.out.println("2. Listar");
+            System.out.println("3. Actualizar");
+            System.out.println("4. Eliminar");
+            System.out.println("0. Regresar");
+            System.out.print("Seleccione una opción: ");
+            opcion=sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1 -> registrar(sc);
+                case 2 -> listar();
+                case 3 -> actualizar(sc);
+                case 4 -> eliminar(sc);
+                case 0 -> System.out.println("Regresando al menú");
+                default -> System.out.println("Opción no valida");
+            }
+        }while (opcion!=0);
+    }
+
+    private void registrar(Scanner sc){
+        System.out.println("Id:");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Nombre:");
+        String nombre=sc.nextLine();
+        System.out.println("Correo:");
+        String correo=sc.nextLine();
+        service.registrar(new estudiante(id,nombre,correo));
+        System.out.println("Estudiante Registrado");
+    }
+
+    private void listar(){
+        service.listar().forEach(e-> System.out.println(e.getId()+""+e.getNombre()+""+e.getCorreo()+"\n"));
+    }
+
+    private void actualizar(Scanner sc){
+        System.out.print("ID del estudiante: ");
+        int idAct = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Nuevo nombre: ");
+        String nombreAct = sc.nextLine();
+
+        System.out.print("Nuevo correo: ");
+        String correoAct = sc.nextLine();
+
+        boolean actualizado = service.actualizar(
+                new estudiante(idAct, nombreAct, correoAct)
+        );
+
+        System.out.println(
+                actualizado
+                        ? "Estudiante actualizado."
+                        : "Estudiante no encontrado."
+        );
+    }
+
+    private void eliminar(Scanner sc){
+        System.out.print("ID a eliminar: ");
+        int idEliminar = sc.nextInt();
+
+        boolean eliminado = service.eliminar(idEliminar);
+        System.out.println(
+                eliminado
+                        ? "Estudiante eliminado."
+                        : "Estudiante no encontrado."
+        );
+    }
+}

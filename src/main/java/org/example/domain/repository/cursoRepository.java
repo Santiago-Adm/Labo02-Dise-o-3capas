@@ -1,6 +1,6 @@
-package org.example.data;
+package org.example.domain.repository;
 
-import org.example.busines.curso;
+import org.example.domain.model.curso;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

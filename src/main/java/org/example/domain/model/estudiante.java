@@ -1,4 +1,4 @@
-package org.example.busines;
+package org.example.domain.model;
 
 public class estudiante {
     private int id;

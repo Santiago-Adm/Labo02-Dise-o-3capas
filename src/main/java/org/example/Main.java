@@ -1,15 +1,23 @@
 package org.example;
 
-import org.example.presentacion.estudianteUI;
-import org.example.presentacion.cursoUI;
+import org.example.application.estudianteService;
+import org.example.presentation.estudianteUI;
+import org.example.domain.repository.estudianteRepository;
+import org.example.infrastructure.persistence.estudianteRepositoryJson;
+
+import org.example.presentation.cursoUI;
 
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main() {
         Scanner sc= new Scanner(System.in);
+
+        //Inversion de dependencia para estudiante
+        estudianteRepository estudianteRepository = new estudianteRepositoryJson();
+        estudianteService estudianteService = new estudianteService(estudianteRepository);
+        estudianteUI estudianteUI = new estudianteUI(estudianteService);
+
         int opcion;
 
         do{
@@ -21,19 +29,17 @@ public class Main {
             opcion=sc.nextInt();
 
             switch (opcion){
-                case 1:
+                case 1 -> {
                     System.out.println("Ha elegido Gestionar Estudiante.");
                     estudianteUI.mostrarMenu(sc);
-                    break;
-                case 2:
+                }
+
+                case 2 -> {
                     System.out.println("Ha elegido Gestionar Cursos.");
-                    cursoUI.mostrarMenu(sc);
-                    break;
-                case 0:
-                    System.out.println("Sistema finalizado.");
-                    break;
-                default:
-                    System.out.println("Opcion no valida");
+                    //cursoUI.mostrarMenu(sc);
+                }
+                case 0 -> System.out.println("Sistema finalizado.");
+                default -> System.out.println("Opcion no valida");
 
             }
         }while(opcion!=0);

@@ -1,7 +1,7 @@
-package org.example.presentacion;
+package org.example.presentation;
 
-import org.example.busines.curso;
-import org.example.busines.cursoService;
+import org.example.domain.model.curso;
+import org.example.application.cursoService;
 import java.util.Scanner;
 
 public class cursoUI {
@@ -54,14 +54,12 @@ public class cursoUI {
                     break;
 
                 case 2:
-                    System.out.println("\n--- LISTA DE CURSOS ---");
-                    if (service.listar().isEmpty()) {
-                        System.out.println("No hay cursos registrados.");
-                    } else {
-                        service.listar().forEach(c ->
-                                System.out.println("ID: " + c.getId() + " | Nombre: " + c.getNombre())
-                        );
-                    }
+                    service.listar().forEach(c ->
+                            System.out.println(
+                                    c.getId() + " - " +
+                                            c.getNombre()
+                            )
+                    );
                     break;
 
                 case 3:
@@ -92,9 +90,6 @@ public class cursoUI {
                     sc.nextLine();
                     boolean eliminado = service.eliminar(idEliminar);
                     System.out.println(eliminado ? "Curso eliminado con éxito." : "Curso no encontrado.");
-                    break;
-
-                case 0:
                     break;
 
                 default:

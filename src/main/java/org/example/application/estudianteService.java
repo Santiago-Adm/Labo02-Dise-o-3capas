@@ -1,12 +1,15 @@
-package org.example.busines;
-import org.example.data.estudianteRepository;
+package org.example.application;
+import org.example.domain.repository.estudianteRepository;
+import org.example.domain.model.estudiante;
+
 import java.util.List;
 
 public class estudianteService {
     private final estudianteRepository repository;
 
-    public estudianteService(){
-        repository=new estudianteRepository();
+    public estudianteService(estudianteRepository repository) {
+        this.repository=repository;
+        // repository=new estudianteRepository();
     }
 
     public void registrar(estudiante estudiante){
@@ -16,6 +19,7 @@ public class estudianteService {
     }
 
     public List<estudiante> listar(){
+
         return repository.listar();
     }
 

@@ -1,6 +1,8 @@
-package org.example.busines;
+package org.example.application;
 
-import org.example.data.cursoRepository;
+import org.example.domain.repository.cursoRepository;
+import org.example.domain.model.curso;
+
 import java.util.List;
 
 public class cursoService {
