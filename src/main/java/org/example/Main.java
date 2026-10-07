@@ -1,11 +1,13 @@
 package org.example;
 
+import org.example.application.cursoService;
 import org.example.application.estudianteService;
-import org.example.presentation.estudianteUI;
+import org.example.domain.repository.cursoRepository;
 import org.example.domain.repository.estudianteRepository;
-import org.example.infrastructure.persistence.estudianteRepositoryJson;
-
+import org.example.presentation.estudianteUI;
 import org.example.presentation.cursoUI;
+import org.example.infrastructure.persistence.estudianteRepositoryJson;
+import org.example.infrastructure.persistence.cursoRepositoryJson;
 
 import java.util.Scanner;
 
@@ -17,6 +19,11 @@ public class Main {
         estudianteRepository estudianteRepository = new estudianteRepositoryJson();
         estudianteService estudianteService = new estudianteService(estudianteRepository);
         estudianteUI estudianteUI = new estudianteUI(estudianteService);
+
+        //Inversion de dependencia para cursos
+        cursoRepository cursoRepository = new cursoRepositoryJson();
+        cursoService cursoService = new cursoService(cursoRepository);
+        cursoUI cursoUI = new cursoUI(cursoService);
 
         int opcion;
 
@@ -36,7 +43,7 @@ public class Main {
 
                 case 2 -> {
                     System.out.println("Ha elegido Gestionar Cursos.");
-                    //cursoUI.mostrarMenu(sc);
+                    cursoUI.mostrarMenu(sc);
                 }
                 case 0 -> System.out.println("Sistema finalizado.");
                 default -> System.out.println("Opcion no valida");

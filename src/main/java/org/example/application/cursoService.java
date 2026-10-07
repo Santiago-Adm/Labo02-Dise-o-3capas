@@ -8,8 +8,8 @@ import java.util.List;
 public class cursoService {
     private final cursoRepository repository;
 
-    public cursoService() {
-        repository = new cursoRepository();
+    public cursoService(cursoRepository repository) {
+        this.repository = repository;
     }
 
     public void registrar(curso curso) {
