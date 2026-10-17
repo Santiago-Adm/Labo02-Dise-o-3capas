@@ -1,4 +1,4 @@
-package org.example.application;
+package org.example.application.service;
 
 import org.example.domain.repository.cursoRepository;
 import org.example.domain.model.curso;

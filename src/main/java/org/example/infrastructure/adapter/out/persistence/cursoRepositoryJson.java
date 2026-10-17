@@ -1,4 +1,4 @@
-package org.example.infrastructure.persistence;
+package org.example.infrastructure.adapter.out.persistence;
 
 import org.example.domain.model.curso;
 import org.example.domain.repository.cursoRepository;

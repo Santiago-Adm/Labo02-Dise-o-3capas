@@ -1,4 +1,4 @@
-package org.example.infrastructure.persistence;
+package org.example.infrastructure.adapter.out.persistence;
 
 import org.example.domain.model.estudiante;
 import org.example.domain.repository.estudianteRepository;
@@ -13,6 +13,7 @@ import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class estudianteRepositoryJson implements estudianteRepository {
 
@@ -37,6 +38,26 @@ public class estudianteRepositoryJson implements estudianteRepository {
         } catch (Exception e) {
             System.out.println("Error al guardar Estudiantes");
         }
+    }
+
+    @Override
+    public void guardar(estudiante estudiante) {
+
+    }
+
+    @Override
+    public Optional<estudiante> buscarPorId(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean actualizar(estudiante estudiante) {
+        return false;
+    }
+
+    @Override
+    public boolean eliminar(int id) {
+        return false;
     }
 
 }

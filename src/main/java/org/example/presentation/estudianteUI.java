@@ -1,11 +1,13 @@
 package org.example.presentation;
+import org.example.application.port.in.estudianteUseCase;
 import org.example.domain.model.estudiante;
-import org.example.application.estudianteService;
+import org.example.application.service.estudianteService;
 import java.util.Scanner;
 
 public class estudianteUI {
-    private final estudianteService service;
-    public estudianteUI(estudianteService service){
+    //private final estudianteService service;
+    private final estudianteUseCase service;
+    public estudianteUI(estudianteUseCase service){
         this.service = service;
     }
 

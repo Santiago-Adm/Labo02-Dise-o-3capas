@@ -1,13 +1,14 @@
 package org.example;
 
-import org.example.application.cursoService;
-import org.example.application.estudianteService;
+import org.example.application.service.cursoService;
+import org.example.application.service.estudianteService;
 import org.example.domain.repository.cursoRepository;
 import org.example.domain.repository.estudianteRepository;
 import org.example.presentation.estudianteUI;
 import org.example.presentation.cursoUI;
-import org.example.infrastructure.persistence.estudianteRepositoryJson;
-import org.example.infrastructure.persistence.cursoRepositoryJson;
+import org.example.infrastructure.adapter.out.persistence.estudianteRepositoryJson;
+import org.example.infrastructure.adapter.out.persistence.cursoRepositoryJson;
+import org.example.infrastructure.adapter.out.persistence.estudianteRepositoryPostgres;
 
 import java.util.Scanner;
 
@@ -16,9 +17,12 @@ public class Main {
         Scanner sc= new Scanner(System.in);
 
         //Inversion de dependencia para estudiante
-        estudianteRepository estudianteRepository = new estudianteRepositoryJson();
+        estudianteRepository estudianteRepository = new estudianteRepositoryPostgres();
         estudianteService estudianteService = new estudianteService(estudianteRepository);
         estudianteUI estudianteUI = new estudianteUI(estudianteService);
+
+        //Adaptador de salida
+
 
         //Inversion de dependencia para cursos
         cursoRepository cursoRepository = new cursoRepositoryJson();

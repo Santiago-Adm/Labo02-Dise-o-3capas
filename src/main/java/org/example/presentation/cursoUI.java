@@ -1,7 +1,7 @@
 package org.example.presentation;
 
 import org.example.domain.model.curso;
-import org.example.application.cursoService;
+import org.example.application.service.cursoService;
 import java.util.Scanner;
 
 public class cursoUI {
