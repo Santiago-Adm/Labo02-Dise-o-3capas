@@ -4,13 +4,10 @@ import org.example.domain.model.estudiante;
 
 import java.util.List;
 
-public abstract class estudianteUseCase {
+public interface estudianteUseCase {
 
-    public abstract void registrar(estudiante estudiante);
-
-    public abstract List<estudiante> listar();
-
-    public abstract Boolean actualizar(estudiante estudiante);
-
-    public abstract Boolean eliminar(int id);
+    void registrar(estudiante estudiante);
+    List<estudiante> listar();
+    Boolean actualizar(estudiante estudiante);
+    Boolean eliminar(int id);
 }

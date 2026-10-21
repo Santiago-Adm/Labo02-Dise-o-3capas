@@ -5,7 +5,7 @@ import org.example.application.port.in.estudianteUseCase;
 
 import java.util.List;
 
-public class estudianteService extends estudianteUseCase {
+public class estudianteService implements estudianteUseCase {
     private final estudianteRepository repository;
 
     public estudianteService(estudianteRepository repository) {
@@ -20,7 +20,6 @@ public class estudianteService extends estudianteUseCase {
 
     @Override
     public List<estudiante> listar(){
-
         return repository.listar();
     }
 

@@ -42,21 +42,38 @@ public class estudianteRepositoryJson implements estudianteRepository {
 
     @Override
     public void guardar(estudiante estudiante) {
+        List<estudiante> lista = listar();
+        lista.add(estudiante);
+        guardar(lista);
 
     }
 
     @Override
     public Optional<estudiante> buscarPorId(int id) {
-        return Optional.empty();
+        return listar().stream().filter(e -> e.getId() == id).findFirst();
     }
 
     @Override
     public boolean actualizar(estudiante estudiante) {
+        List<estudiante> lista = listar();
+        for (estudiante e : lista) {
+            if (e.getId() == estudiante.getId()) {
+                e.setNombre(estudiante.getNombre());
+                e.setCorreo(estudiante.getCorreo());
+                guardar(lista);
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean eliminar(int id) {
+        List<estudiante> lista = listar();
+        boolean eliminado = lista.removeIf(e -> e.getId() == id);
+        if (eliminado) {
+            guardar(lista);
+        }
         return false;
     }
 

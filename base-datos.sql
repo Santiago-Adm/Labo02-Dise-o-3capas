@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS estudiante (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL
+);
