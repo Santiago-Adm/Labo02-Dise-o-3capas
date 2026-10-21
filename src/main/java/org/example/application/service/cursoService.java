@@ -1,45 +1,35 @@
 package org.example.application.service;
 
+import org.example.application.port.in.cursoUseCase;
 import org.example.domain.repository.cursoRepository;
 import org.example.domain.model.curso;
 
 import java.util.List;
 
-public class cursoService {
+public class cursoService implements cursoUseCase {
     private final cursoRepository repository;
 
     public cursoService(cursoRepository repository) {
         this.repository = repository;
     }
 
+    @Override
     public void registrar(curso curso) {
-        List<curso> cursos = repository.listar();
-        cursos.add(curso);
-        repository.guardar(cursos);
+        repository.guardar(curso);
     }
 
+    @Override
     public List<curso> listar() {
         return repository.listar();
     }
 
+    @Override
     public Boolean actualizar(curso curso) {
-        List<curso> cursos = repository.listar();
-        for (curso c : cursos) {
-            if (c.getId() == curso.getId()) {
-                c.setNombre(curso.getNombre());
-                repository.guardar(cursos);
-                return true;
-            }
-        }
-        return false;
+        return repository.actualizar(curso);
     }
 
+    @Override
     public Boolean eliminar(int id) {
-        List<curso> cursos = repository.listar();
-        boolean eliminado = cursos.removeIf(c -> c.getId() == id);
-        if (eliminado) {
-            repository.guardar(cursos);
-        }
-        return eliminado;
+        return repository.eliminar(id);
     }
 }

@@ -1,14 +1,15 @@
 package org.example;
 
+import org.example.application.port.in.cursoUseCase;
+import org.example.application.port.in.estudianteUseCase;
 import org.example.application.service.cursoService;
 import org.example.application.service.estudianteService;
 import org.example.domain.repository.cursoRepository;
 import org.example.domain.repository.estudianteRepository;
 import org.example.presentation.estudianteUI;
 import org.example.presentation.cursoUI;
-import org.example.infrastructure.adapter.out.persistence.estudianteRepositoryJson;
-import org.example.infrastructure.adapter.out.persistence.cursoRepositoryJson;
 import org.example.infrastructure.adapter.out.persistence.estudianteRepositoryPostgres;
+import org.example.infrastructure.adapter.out.persistence.cursoRepositoryPostgres;
 
 import java.util.Scanner;
 
@@ -16,18 +17,18 @@ public class Main {
     static void main() {
         Scanner sc= new Scanner(System.in);
 
-        //Inversion de dependencia para estudiante
+        //Ensamblado estudiantes Hexagonal con PotsgreSQl
         estudianteRepository estudianteRepository = new estudianteRepositoryPostgres();
-        estudianteService estudianteService = new estudianteService(estudianteRepository);
-        estudianteUI estudianteUI = new estudianteUI(estudianteService);
+        estudianteService estudianteUseCase = new estudianteService(estudianteRepository);
+        estudianteUI estudianteUI = new estudianteUI(estudianteUseCase);
 
         //Adaptador de salida
 
 
-        //Inversion de dependencia para cursos
-        cursoRepository cursoRepository = new cursoRepositoryJson();
-        cursoService cursoService = new cursoService(cursoRepository);
-        cursoUI cursoUI = new cursoUI(cursoService);
+        //Ensamblado curso hexagonal con PotsgreSQL
+        cursoRepository cursoRepository = new cursoRepositoryPostgres();
+        cursoService cursoUseCase = new cursoService(cursoRepository);
+        cursoUI cursoUI = new cursoUI(cursoUseCase);
 
         int opcion;
 

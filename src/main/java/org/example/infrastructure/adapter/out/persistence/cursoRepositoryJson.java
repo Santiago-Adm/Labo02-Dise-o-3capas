@@ -10,6 +10,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class cursoRepositoryJson implements cursoRepository {
     private final String archivo = "data/cursos.json";
@@ -33,6 +34,41 @@ public class cursoRepositoryJson implements cursoRepository {
         } catch (IOException e) {
             System.out.println("Error al guardar el archivo");
         }
+    }
+
+    @Override
+    public void guardar(curso curso) {
+        List<curso> lista = listar();
+        lista.add(curso);
+        guardar(lista);
+    }
+
+    @Override
+    public Optional<curso> buscarPorId(int id) {
+        return listar().stream().filter(c -> c.getId() == id).findFirst();
+    }
+
+    @Override
+    public boolean actualizar(curso curso) {
+        List<curso> lista = listar();
+        for (curso c : lista) {
+            if (c.getId() == curso.getId()) {
+                c.setNombre(curso.getNombre());
+                guardar(lista);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean eliminar(int id) {
+        List<curso> lista = listar();
+        boolean eliminado = lista.removeIf(c -> c.getId() == id);
+        if (eliminado) {
+            guardar(lista);
+        }
+        return eliminado;
     }
 
 }

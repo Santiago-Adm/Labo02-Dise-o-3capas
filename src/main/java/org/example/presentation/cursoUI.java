@@ -1,11 +1,12 @@
 package org.example.presentation;
 
 import org.example.domain.model.curso;
-import org.example.application.service.cursoService;
+import org.example.application.port.in.cursoUseCase;
+
 import java.util.Scanner;
 
 public class cursoUI {
-    private static cursoService service = null;
+    private final cursoUseCase service;
 
     private static final String[] CURSOS_DISPONIBLES = {
             "Arquitectura de Software",
@@ -17,11 +18,11 @@ public class cursoUI {
             "Telecomunicaciones"
     };
 
-    public cursoUI(cursoService service) {
-        cursoUI.service = service;
+    public cursoUI(cursoUseCase service) {
+        this.service = service;
     }
 
-    public static void mostrarMenu(Scanner sc) {
+    public void mostrarMenu(Scanner sc) {
         int opcion;
         do {
             System.out.println("\n=== GESTIÓN DE CURSOS ===");
@@ -45,7 +46,7 @@ public class cursoUI {
         } while (opcion != 0);
     }
 
-    private static void registrar(Scanner sc) {
+    private void registrar(Scanner sc) {
         System.out.print("ID del estudiante: ");
         int id = sc.nextInt();
         sc.nextLine();
@@ -67,7 +68,7 @@ public class cursoUI {
         }
     }
 
-    private static void listar() {
+    private void listar() {
         service.listar().forEach(c ->
                 System.out.println(
                         c.getId() + " - " +
@@ -76,7 +77,7 @@ public class cursoUI {
         );
     }
 
-    private static void actualizar(Scanner sc) {
+    private void actualizar(Scanner sc) {
         System.out.print("ID del curso a actualizar: ");
         int idAct = sc.nextInt();
         sc.nextLine();
@@ -98,7 +99,7 @@ public class cursoUI {
         }
     }
 
-    private static void eliminar(Scanner sc) {
+    private void eliminar(Scanner sc) {
         System.out.print("ID del curso a eliminar: ");
         int idEliminar = sc.nextInt();
         sc.nextLine();
